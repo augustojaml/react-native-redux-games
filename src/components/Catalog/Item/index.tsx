@@ -39,7 +39,6 @@ export function Item({ item }: IItemProps) {
   const handleAddProductQuantityToCard = useCallback(
     (product: ICartProduct) => {
       dispatch(checkProductStockByIdAndAddToCart(product));
-      alert(checkStock);
     },
     [dispatch]
   );
