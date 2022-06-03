@@ -1,11 +1,11 @@
 import { shadow } from '@components/Catalog/Item';
 import { cartsSlice } from '@global/redux/carts/cartsSlice';
 import { checkProductStockByIdAndAddToCart } from '@global/redux/carts/cartsThunks';
-import { ICartProduct } from '@global/redux/carts/cartsTypes';
-import { IStoreDispatch } from '@global/redux/store';
+import { ICartProduct, ICartState } from '@global/redux/carts/cartsTypes';
+import { IStoreDispatch, IStoreReducer } from '@global/redux/store';
 import { MinusCircle, PlusCircle, Trash } from 'phosphor-react-native';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   ActionsButton,
   ActionsContainer,
@@ -16,6 +16,8 @@ import {
   TextQuantity,
   Title,
   Value,
+  OutOfStockContainer,
+  OutOfStockText,
 } from './styled';
 
 interface ICartItem {
@@ -34,6 +36,10 @@ interface ICartItemProps {
 
 export function CartItem({ cart }: ICartItemProps) {
   const dispatch: IStoreDispatch = useDispatch();
+
+  const { productOutOfStock } = useSelector<IStoreReducer, ICartState>((state) => state.carts);
+
+  const checkStock = productOutOfStock.includes(cart.product.id);
 
   const handleAddProductQuantityToCard = useCallback(
     (product: ICartProduct) => {
@@ -65,6 +71,13 @@ export function CartItem({ cart }: ICartItemProps) {
           }}
         />
         <Title>{cart.product.title}</Title>
+
+        {checkStock && (
+          <OutOfStockContainer>
+            <OutOfStockText>Out of stock</OutOfStockText>
+          </OutOfStockContainer>
+        )}
+
         <ActionsContainer>
           <ActionsButton onPress={() => handleRemoveProductQuantityToCard(cart.product)}>
             <MinusCircle size={20} />

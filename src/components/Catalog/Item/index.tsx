@@ -28,13 +28,18 @@ interface IItemProps {
 
 export function Item({ item }: IItemProps) {
   const dispatch: IStoreDispatch = useDispatch();
-  const { items } = useSelector<IStoreReducer, ICartState>((state) => state.carts);
+  const { items, productOutOfStock } = useSelector<IStoreReducer, ICartState>(
+    (state) => state.carts
+  );
 
   const quantity = items.find((cart) => cart.product.id === item.id)?.quantity || 0;
+
+  const checkStock = productOutOfStock.includes(item.id);
 
   const handleAddProductQuantityToCard = useCallback(
     (product: ICartProduct) => {
       dispatch(checkProductStockByIdAndAddToCart(product));
+      alert(checkStock);
     },
     [dispatch]
   );
@@ -51,7 +56,12 @@ export function Item({ item }: IItemProps) {
           <Title>{item.title}</Title>
         </ContainerTitle>
         <Price>$ {item.price}</Price>
-        <Button quantity={quantity} onPress={() => handleAddProductQuantityToCard(item)} />
+        <Button
+          quantity={quantity}
+          onPress={() => handleAddProductQuantityToCard(item)}
+          disabled={checkStock}
+          title={checkStock ? 'Out of stock' : 'Add to card'}
+        />
       </Container>
     </>
   );

@@ -1,11 +1,16 @@
 import { theme } from '@global/styles/theme';
 import { ShoppingCartSimple } from 'phosphor-react-native';
-import { darken } from 'polished';
+import { darken, transparentize } from 'polished';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 
-export const Container = styled(TouchableOpacity)`
-  background-color: ${theme.colors.main001};
+interface IStyledProps {
+  disabled?: boolean;
+}
+
+export const Container = styled(TouchableOpacity)<IStyledProps>`
+  background-color: ${({ disabled }) =>
+    disabled ? transparentize(0.7, theme.colors.main001) : theme.colors.main001};
   height: 35px;
   flex-direction: row;
   align-items: center;

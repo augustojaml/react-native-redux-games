@@ -12,12 +12,19 @@ import {
 
 interface IButtonProps extends TouchableOpacityProps {
   quantity?: number;
+  disabled?: boolean;
+  title?: string;
 }
 
-export function Button({ quantity = 0, ...rest }: IButtonProps) {
+export function Button({
+  quantity = 0,
+  disabled = false,
+  title = 'Button',
+  ...rest
+}: IButtonProps) {
   return (
     <>
-      <Container {...rest}>
+      <Container disabled={disabled} {...rest}>
         <IconContainer>
           {quantity > 0 && (
             <QuantityContent>
@@ -28,7 +35,7 @@ export function Button({ quantity = 0, ...rest }: IButtonProps) {
           <Icon color={theme.colors.background} size={18} />
         </IconContainer>
         <TitleContainer>
-          <Title>Add To Cart</Title>
+          <Title>{title}</Title>
         </TitleContainer>
       </Container>
     </>

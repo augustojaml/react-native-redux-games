@@ -57,3 +57,17 @@ export const Value = styled.Text`
   font-size: 18px;
   font-family: ${theme.fonts.title};
 `;
+
+export const OutOfStockContainer = styled.View`
+  background-color: ${theme.colors.main001};
+  height: 20px;
+  padding: 0 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+`;
+
+export const OutOfStockText = styled.Text`
+  font-size: 12px;
+  font-family: ${theme.fonts.text};
+  color: ${theme.colors.background};
+`;
