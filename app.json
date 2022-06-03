@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "redux-react-native-mygames",
+    "slug": "redux-react-native-mygames",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
