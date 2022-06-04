@@ -18,6 +18,7 @@
 ```bash
   git clone https://github.com/augustojaml/Redux-Games.git
 ```
+- Opção mudar para o ip nos arquivos `src/_global/libs/api.ts` e em script server do arquivo `package.json` para o ip da da sua máquina.
 
 - Inicie json-server
 
@@ -31,7 +32,7 @@
   yarn start
 ```
 
-- Opção mudar para o ip nos arquivos `src/_global/libs/api.ts` e em script server do arquivo `package.json` para o ip da da sua máquina.
+
 
 ## Tópicos
 
